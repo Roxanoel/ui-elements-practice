@@ -1,7 +1,7 @@
 import './styles.css';
 
 function setElementAsDropdown(hoverElement, dropdownToShow) {
-  hoverElement.addEventListener('click', () => {
+  hoverElement.addEventListener('mouseenter', () => {
     hoverElement.classList.add('selected');
     dropdownToShow.classList.remove('hidden');
   });
