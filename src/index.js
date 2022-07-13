@@ -1,6 +1,6 @@
 import { setElementAsDropdown } from './dropdowns';
 
-const allDropdowns = Array.from(document.querySelectorAll('.dropdown'));
+const allDropdowns = Array.from(document.querySelectorAll('.dropdown-label'));
 const allDropdownContents = Array.from(document.querySelectorAll('.dropdown-contents'));
 
 for (let i = 0; i < allDropdowns.length; i += 1) {
