@@ -1,24 +1,3 @@
-function previousSlide(e) {
-  console.log(e);
-}
-
-function _setupDataIndices(carrouselObject) {
-  for (let i = 0; i < carrouselObject.slidesArray.length; i += 1) {
-    carrouselObject.slidesArray[i].setAttribute('data-index', i);
-    carrouselObject.navCirclesArray[i].setAttribute('data-index, i');
-  }
-}
-
-function _setupNav(carrouselObject) {
-  carrouselObject.leftArrow.addEventListener('click', previousSlide);
-}
-
-function setupCarrousel(carrouselObject) {
-  if(carrouselObject.initialised) return;
-  _setupDataIndices(carrouselObject);
-  _setupNav(carrouselObject);
-}
-
 function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow) {
   return {
     slidesArray,
@@ -27,10 +6,64 @@ function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow)
     rightArrow,
     currentSlideIndex: 0,
     initialised: false,
+
+    nextSlide() {
+      if (this.currentSlideIndex < this.slidesArray.length - 1) {
+        this.currentSlideIndex += 1;
+      } else {
+        this.currentSlideIndex = 0;
+      }
+      return this.currentSlideIndex;
+    },
+    previousSlide() {
+      if (this.currentSlideIndex > 0) {
+        this.currentSlideIndex -= 1;
+      } else {
+        this.currentSlideIndex = this.slidesArray.length - 1;
+      }
+    },
+    getSlideByIndex(index) {
+      this.currentSlideIndex = index;
+    },
+    loadCurrentSlide() {
+      console.log(this.currentSlideIndex);
+      for (let i = 0; i < this.slidesArray.length; i += 1) {
+        if (+(slidesArray[i].dataset.index) === this.currentSlideIndex) {
+          slidesArray[i].classList.remove('hidden');
+          navCirclesArray[i].classList.add('selected');
+        } else {
+          slidesArray[i].classList.add('hidden');
+          navCirclesArray[i].classList.remove('selected');
+        }
+      }
+    },
+    setupCarrousel() {
+      if (this.initialised) return;
+      for (let i = 0; i < this.slidesArray.length; i += 1) {
+        this.slidesArray[i].setAttribute('data-index', i);
+        this.navCirclesArray[i].setAttribute('data-index', i);
+      }
+      this.leftArrow.addEventListener('click', () => {
+        this.previousSlide();
+        this.loadCurrentSlide();
+      });
+      this.rightArrow.addEventListener('click', () => {
+        this.nextSlide();
+        this.loadCurrentSlide();
+      });
+      navCirclesArray.forEach((circle) => {
+        circle.addEventListener('click', (e) => {
+          this.getSlideByIndex(+e.target.dataset.index);
+          this.loadCurrentSlide();
+        });
+      });
+      this.initialised = true;
+    },
+
   };
 }
 
 export {
+  // eslint-disable-next-line import/prefer-default-export
   newCarrouselObject,
-  setupCarrousel,
 };

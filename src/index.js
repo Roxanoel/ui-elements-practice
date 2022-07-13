@@ -1,6 +1,6 @@
 import { setElementAsDropdown } from './dropdowns';
 
-import { newCarrouselObject, setupCarrousel } from './carrousels';
+import { newCarrouselObject } from './carrousels';
 
 const allDropdowns = Array.from(document.querySelectorAll('.dropdown-label'));
 const allDropdownContents = Array.from(document.querySelectorAll('.dropdown-contents'));
@@ -15,4 +15,5 @@ const leftArrow = document.querySelector('.arrow.left');
 const rightArrow = document.querySelector('.arrow.right');
 
 const carrousel = newCarrouselObject(carrouselSlides, navCircles, leftArrow, rightArrow);
+carrousel.setupCarrousel();
 console.log(carrousel);
