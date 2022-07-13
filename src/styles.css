@@ -87,6 +87,15 @@ html {
 
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    object-fit: fill;
+}
+
+.arrow {
+    height: 4rem;
 }
 
 .carrousel-nav {
@@ -96,14 +105,17 @@ html {
     justify-content: center;
 
     gap: 1rem;
+
+    padding: .5rem;
 }
 
 .carrousel-nav li {
     width: 1rem;
     height: 1rem;
 
-    border: 1px solid grey;
+    border: 2px solid grey;
     border-radius: 50%;
+
 }
 
 .carrousel-nav li.selected {
