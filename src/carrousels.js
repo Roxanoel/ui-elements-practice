@@ -26,7 +26,6 @@ function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow)
       this.currentSlideIndex = index;
     },
     loadCurrentSlide() {
-      console.log(this.currentSlideIndex);
       for (let i = 0; i < this.slidesArray.length; i += 1) {
         if (+(slidesArray[i].dataset.index) === this.currentSlideIndex) {
           slidesArray[i].classList.remove('hidden');
@@ -49,6 +48,7 @@ function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow)
         this.slidesArray[i].setAttribute('data-index', i);
         this.navCirclesArray[i].setAttribute('data-index', i);
       }
+      this.loadCurrentSlide();
       this.leftArrow.addEventListener('click', () => {
         this.previousSlide();
         this.loadCurrentSlide();
