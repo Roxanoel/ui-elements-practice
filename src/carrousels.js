@@ -37,6 +37,12 @@ function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow)
         }
       }
     },
+    startTimer() {
+      setInterval(() => {
+        this.nextSlide();
+        this.loadCurrentSlide();
+      }, 5000);
+    },
     setupCarrousel() {
       if (this.initialised) return;
       for (let i = 0; i < this.slidesArray.length; i += 1) {
@@ -57,6 +63,7 @@ function newCarrouselObject(slidesArray, navCirclesArray, leftArrow, rightArrow)
           this.loadCurrentSlide();
         });
       });
+      this.startTimer();
       this.initialised = true;
     },
 
